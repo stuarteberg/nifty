@@ -50,9 +50,9 @@ build:
 
 requirements:
   build:
-    - boost >=1.63.0
+    - boost 1.64.*
     - python {{PY_VER}}*
-    - hdf5 >=1.8.17
+    - hdf5 1.8.18
     - numpy {{NPY_VER}}*
     - xtensor
     - xtensor-python
@@ -66,9 +66,9 @@ requirements:
     {% endif %}
 
   run:
-    - boost >=1.63.0
+    - boost 1.64.*
     - python {{PY_VER}}*
-    - hdf5 >=1.8.17
+    - hdf5 1.8.18
     - numpy {{NPY_VER}}*
     - fastfilters
     - scikit-image
