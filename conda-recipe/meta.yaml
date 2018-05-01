@@ -50,6 +50,7 @@ build:
 
 requirements:
   build:
+    - cmake
     - boost 1.64.*
     - python {{PY_VER}}*
     - hdf5 1.8.18
