@@ -1,91 +1,50 @@
-# WITH_CPLEX and WITH_GUROBI are exclusive options to be set with environment
-# variables. To be active, they should be set to a value of 1
-{% if not WITH_CPLEX is defined %}
-  {% set WITH_CPLEX = 0 %}
-{% endif %}
-{% set WITH_CPLEX = WITH_CPLEX|int %}
-
-{% if not WITH_GUROBI is defined %}
-  {% set WITH_GUROBI = 0 %}
-{% endif %}
-{% set WITH_GUROBI = WITH_GUROBI|int %}
 
 package:
-  {% if WITH_CPLEX == 1 %}
-    name: nifty-with-cplex
-  {% elif WITH_GUROBI == 1 %}
-    name: nifty-with-gurobi
-  {% else %}
     name: nifty
-  {% endif %}
     version: v1.0.5
 
 source:
   path: ..
 
-
 build:
   number: 0
 
-  script_env:
-     - WITH_CPLEX
-     - CPLEX_ROOT_DIR
-     - CPLEX_WIN_VERSION # [win]
-     - WITH_GUROBI
-     - GUROBI_ROOT_DIR
-     - GUROBI_LIB_WIN # [win]
-
 requirements:
   build:
-    - gxx_linux-64
-    - python {{PY_VER}}*
-    - boost 1.68.0
-    - hdf5 >=1.10
-    - numpy >=1.15
-    - xtensor 0.19.3
-    - xtensor-python 0.22.1
+    - cmake
+    - {{ compiler("cxx")}}
+  host:
+    - python {{ python }}
+    - boost-cpp {{ boost }}
+    - hdf5 {{ hdf5 }}
+    - numpy {{ numpy }}
+    - xtensor >=0.19,<0.20
+    - xtensor-python >=0.22,<0.23
     - nlohmann_json
-    - blosc
-    - z5py
+    - blosc  # [not win]
+    - bzip2  # [not win]
+    - zlib  # [not win]
+    - z5py  # [not win]
     - vigra
-
-    {% if WITH_CPLEX is defined and WITH_CPLEX %}
-    - cplex-shared # Need to make sure that cplex dylibs exist
-    {% endif %}
-
-    # Must provide symlinks so that the conda doesn't complain when it 'fixes' linking in _nifty.so
-    {% if WITH_GUROBI is defined and WITH_GUROBI %}
-    - gurobi-symlink
-    {% endif %}
 
   run:
-    - python {{PY_VER}}*
-    - boost 1.68.0
-    - hdf5 >=1.10
-    - numpy >=1.15
+    - python
+    - {{ pin_compatible("boost-cpp") }}
+    - hdf5
+    - {{ pin_compatible("numpy") }}
     - scikit-image
-    - blosc
     - vigra
-
-    {% if WITH_CPLEX is defined and WITH_CPLEX %}
-    - cplex-shared # Need to make sure that cplex dylibs exist
-    {% endif %}
-
-    {% if WITH_GUROBI is defined and WITH_GUROBI %}
-    - gurobi-symlink
-    {% endif %}
+    - blosc  # [not win]
+    - bzip2  # [not win]
+    - zlib  # [not win]
 
 test:
-  {% if WITH_CPLEX %}
-    imports:
-      - nifty_with_cplex
-  {% elif WITH_GUROBI %}
-    imports:
-      - nifty_with_gurobi
-  {% else %}
     imports:
       - nifty
-  {% endif %}
+    source_files:
+      - src/python/test/graph/*.py
+    commands:
+      - python -m unittest discover -s src/python/test -v
 
 about:
   home: https://github.com/DerThorsten/nifty
