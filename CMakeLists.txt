@@ -4,7 +4,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 project(NIFTY)
 set(${PROJECT_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-
+# For compatibility with newer versions of z5,
+# Force using boost::filesystem instead of std::filesystem,
+# otherwise z5 and nifty have conflicting definitions of 'namespace fs = ...' 
+add_definitions(-DWITH_BOOST_FS)
 
 
 #-------------------------------------------------------------------------------------------------------------------
