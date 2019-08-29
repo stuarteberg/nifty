@@ -1,5 +1,7 @@
 #pragma once
 
+#include "boost/filesystem.hpp"
+
 #include "vigra/accumulator.hxx"
 #include "nifty/distributed/distributed_graph.hxx"
 

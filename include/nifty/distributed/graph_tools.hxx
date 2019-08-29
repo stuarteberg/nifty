@@ -1,6 +1,8 @@
 #pragma once
 
+#include "boost/filesystem.hpp"
 #include "boost/pending/disjoint_sets.hpp"
+
 #include "z5/util/for_each.hxx"
 #include "z5/util/util.hxx"
 

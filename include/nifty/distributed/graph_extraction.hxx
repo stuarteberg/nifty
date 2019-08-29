@@ -2,6 +2,8 @@
 
 #include <unordered_set>
 #include <set>
+
+#include <boost/filesystem.hpp>
 #include <boost/functional/hash.hpp>
 
 #include "xtensor/xtensor.hpp"

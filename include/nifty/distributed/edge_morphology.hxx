@@ -1,5 +1,7 @@
 #pragma once
 
+#include "boost/filesystem.hpp"
+
 #include "nifty/tools/blocking.hxx"
 #include "nifty/distributed/mergeable_features.hxx"
 
