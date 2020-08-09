@@ -1,7 +1,3 @@
-# export CC="${PREFIX}/bin/x86_64-conda_cos6-linux-gnu-gcc"
-# export CXX="${PREFIX}/bin/x86_64-conda_cos6-linux-gnu-g++"
-export CC=x86_64-conda_cos6-linux-gnu-gcc
-export CXX=x86_64-conda_cos6-linux-gnu-g++
 export PY_INSTALL_DIR="${PREFIX}/lib/python3.7/site-packages"
 
 ##

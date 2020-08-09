@@ -1,6 +1,6 @@
 package:
   name: nifty
-  version: v1.0.7
+  version: v1.0.7.1
 
 
 source:
@@ -8,7 +8,7 @@ source:
 
 
 build:
-  number: 1000
+  number: 0
 
 
 requirements:
